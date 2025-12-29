@@ -508,7 +508,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92d8d6b99b63bec409413f9a13ddb796, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Fractal
-  max: 2
+  max: 6
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
