@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class GroundCheck : MonoBehaviour
 {
-    bool isGrounded = false;
+    public bool isGrounded = false;
     void Start()
     {
         
@@ -14,7 +14,7 @@ public class GroundCheck : MonoBehaviour
         
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    private void OnTriggerStay2D(UnityEngine.Collider2D collision)
     {
         if(collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
@@ -23,8 +23,13 @@ public class GroundCheck : MonoBehaviour
     }
 
 
-    private void OnTriggerExit0(Collider other)
+    private void OnTriggerExit2D(UnityEngine.Collider2D collision)
     {
-        isGrounded = false;
+
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            isGrounded = false;
+        }
+        
     }
 }

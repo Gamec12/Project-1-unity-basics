@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] float speed = 5.0f;
     [SerializeField] float jumpHeight = 5.0f;
+    [SerializeField] GroundCheck groundCheck;
 
     private bool isGrounded = false;
 
@@ -24,14 +25,16 @@ public class Player : MonoBehaviour
     void Update()
     {
 
-
+        isGrounded = groundCheck.isGrounded;
+        anim.SetBool("IsJumping", !isGrounded);
+        Debug.Log(isGrounded);
         Move();
-        if (Input.GetKey(KeyCode.D) )
+        if (Input.GetKey(KeyCode.D) && isGrounded)
         {
             anim.SetBool("IsRunning", true);
 
         }
-        else if (Input.GetKey(KeyCode.A))
+        else if (Input.GetKey(KeyCode.A) && isGrounded)
         {
             anim.SetBool("IsRunning", true);
 
@@ -43,6 +46,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
+            Debug.Log("KILL ME");
             Jump();
         }
         if (Input.GetKeyDown(KeyCode.Mouse0) && isGrounded)
@@ -52,22 +56,11 @@ public class Player : MonoBehaviour
         }
 
 
-
-
-
-
-
     }
 
     private void Jump()
     {
-        
-        float moveY = Input.GetAxis("Vertical");
-
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpHeight);
-        isGrounded = false;
-            
-        
+        rb.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
     }
         
 
@@ -75,7 +68,7 @@ public class Player : MonoBehaviour
     {
         float moveX = Input.GetAxis("Horizontal");
 
-        //transform.position += Vector3.right* moveX  * speed * Time.deltaTime;
+
         float newVelocity = moveX * speed;
         rb.linearVelocity = new Vector2(newVelocity, rb.linearVelocity.y); 
         if (moveX > 0) 
