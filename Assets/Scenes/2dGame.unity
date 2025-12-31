@@ -129,7 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 54848762}
   - component: {fileID: 54848761}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -264,6 +264,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 110685277}
+  - component: {fileID: 110685278}
   m_Layer: 0
   m_Name: groundChecek
   m_TagString: Untagged
@@ -280,12 +281,58 @@ Transform:
   m_GameObject: {fileID: 110685276}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.388, z: 0}
+  m_LocalPosition: {x: 0, y: -0.375, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1654517589}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &110685278
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 110685276}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.00018596649, y: 0.01736322}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.37830734, y: 0.024589479}
+  m_EdgeRadius: 0
 --- !u!1 &824121637
 GameObject:
   m_ObjectHideFlags: 0
@@ -4582,7 +4629,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4796709403507147416, guid: be5176e81fd614843b3c92675faddb33, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.26
+      value: -0.42
       objectReference: {fileID: 0}
     - target: {fileID: 4796709403507147416, guid: be5176e81fd614843b3c92675faddb33, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4674,7 +4721,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
   speed: 5
-  jumpHeight: 5
+  jumpHeight: 6
 --- !u!4 &1654517589 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4796709403507147416, guid: be5176e81fd614843b3c92675faddb33, type: 3}

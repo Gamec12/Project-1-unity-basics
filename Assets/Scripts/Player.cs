@@ -7,10 +7,7 @@ public class Player : MonoBehaviour
     [SerializeField] float speed = 5.0f;
     [SerializeField] float jumpHeight = 5.0f;
 
-    //[SerializeField] LayerMask groundMask;
-    //[SerializeField] Transform feetPosition;
-
-    private bool isJumping = false;
+    private bool isGrounded = false;
 
     Animator anim;
     private Rigidbody2D rb;
@@ -26,10 +23,10 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        //float groundCheckRadius = 0.3f;
+
 
         Move();
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D) )
         {
             anim.SetBool("IsRunning", true);
 
@@ -44,12 +41,11 @@ public class Player : MonoBehaviour
             anim.SetBool("IsRunning", false);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && !isJumping)
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
-            //Jump();
-            anim.SetTrigger("Jump");
+            Jump();
         }
-        if (Input.GetKeyDown(KeyCode.Mouse0) && !isJumping)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && isGrounded)
         {
 
             anim.SetTrigger("Attack");
@@ -65,14 +61,13 @@ public class Player : MonoBehaviour
 
     private void Jump()
     {
-        if (isJumping)
-        {
-            float moveY = Input.GetAxis("Vertical");
+        
+        float moveY = Input.GetAxis("Vertical");
 
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpHeight);
-            isJumping = false;
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpHeight);
+        isGrounded = false;
             
-        }
+        
     }
         
 
@@ -80,8 +75,10 @@ public class Player : MonoBehaviour
     {
         float moveX = Input.GetAxis("Horizontal");
 
-        transform.position += Vector3.right* moveX  * speed * Time.deltaTime;
-        if (moveX > 0)
+        //transform.position += Vector3.right* moveX  * speed * Time.deltaTime;
+        float newVelocity = moveX * speed;
+        rb.linearVelocity = new Vector2(newVelocity, rb.linearVelocity.y); 
+        if (moveX > 0) 
         {
             spriteRenderer.flipX = false;
             
