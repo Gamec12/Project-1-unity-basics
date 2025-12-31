@@ -1,12 +1,14 @@
 using System;
+using Unity.VectorGraphics;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
 
     [SerializeField] float speed = 5.0f;
     [SerializeField] float jumpHeight = 5.0f;
     [SerializeField] GroundCheck groundCheck;
+    private int health;
 
     private bool isGrounded = false;
 
@@ -24,6 +26,11 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+
+        if(health == 0)
+        {
+            ReloadScene();
+        }
 
         isGrounded = groundCheck.isGrounded;
         anim.SetBool("IsJumping", !isGrounded);
@@ -46,7 +53,6 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
-            Debug.Log("KILL ME");
             Jump();
         }
         if (Input.GetKeyDown(KeyCode.Mouse0) && isGrounded)
@@ -82,6 +88,19 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "KillBarrier")
+        {
+            ReloadScene();
 
+        }
+    }
 
+    private static void ReloadScene()
+    {
+        UnityEngine.SceneManagement.Scene scene = SceneManager.GetActiveScene();
+
+        SceneManager.LoadScene(scene.name);
+    }
 }
