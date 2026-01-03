@@ -27,12 +27,12 @@ public class Bullet : MonoBehaviour
 
     }
 
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    if(collision.tag != "Player")
-    //    {
-    //        Debug.Log("I AM DYING I HIT A " + collision.tag);
-    //        Destroy(gameObject);
-    //    }
-    //}
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag != "Player")
+        {
+            Debug.Log("I AM DYING I HIT A " + collision.tag);
+            Destroy(gameObject);
+        }
+    }
 }
