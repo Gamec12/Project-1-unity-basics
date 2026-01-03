@@ -6,6 +6,7 @@ TagManager:
   tags:
   - KillBarrier
   - Enemy
+  - Bullet
   layers:
   - Default
   - TransparentFX
