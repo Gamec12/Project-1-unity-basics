@@ -13,8 +13,8 @@ public class GameManager : MonoBehaviour
     }
 
     public void AddScore(int score)
-    {
+    { 
         this.score += score;
-        Debug.Log(score);
+        Debug.Log(this.score);
     }
 }

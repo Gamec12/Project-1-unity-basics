@@ -10,9 +10,9 @@ public class CoinScript : MonoBehaviour
         {
             GameManager.instance.AddScore(value);
 
-            //Destroy(gameObject);
+            Destroy(gameObject);
+            //gameObject.SetActive(false);
 
-            gameObject.SetActive(false);
         }
     }
 }

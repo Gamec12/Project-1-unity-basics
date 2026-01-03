@@ -8,13 +8,17 @@ public class Player : MonoBehaviour
     [SerializeField] float speed = 5.0f;
     [SerializeField] float jumpHeight = 5.0f;
     [SerializeField] GroundCheck groundCheck;
-    private int health;
+    private int health = 100;
 
     private bool isGrounded = false;
 
     Animator anim;
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
+
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private Transform firePoint;
+
 
     void Start()
     {
@@ -34,7 +38,6 @@ public class Player : MonoBehaviour
 
         isGrounded = groundCheck.isGrounded;
         anim.SetBool("IsJumping", !isGrounded);
-        Debug.Log(isGrounded);
         Move();
         if (Input.GetKey(KeyCode.D) && isGrounded)
         {
@@ -60,6 +63,26 @@ public class Player : MonoBehaviour
 
             anim.SetTrigger("Attack");
         }
+
+        if(Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            shoot();
+        }
+
+
+    }
+
+    private void shoot()
+    {
+        GameObject newBullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+
+        Bullet bulletScript = newBullet.GetComponent<Bullet>();
+
+        float directionX = spriteRenderer.flipX ? -1f : 1f;
+
+        Vector2 launchDirection = new Vector2(directionX, 0f);
+
+        bulletScript.Launch(launchDirection);
 
 
     }
