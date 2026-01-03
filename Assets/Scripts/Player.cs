@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Unity.VectorGraphics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,6 +12,7 @@ public class Player : MonoBehaviour
     private int health = 100;
 
     private bool isGrounded = false;
+    private bool isInvulnerable = false;
 
     Animator anim;
     private Rigidbody2D rb;
@@ -18,6 +20,9 @@ public class Player : MonoBehaviour
 
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform firePoint;
+
+    [SerializeField] private Color damageColor = Color.red;
+    [SerializeField] private float flashDuration = 0.5f;
 
 
     void Start()
@@ -31,7 +36,7 @@ public class Player : MonoBehaviour
     void Update()
     {
 
-        if(health == 0)
+        if(health <= 0)
         {
             ReloadScene();
         }
@@ -98,16 +103,19 @@ public class Player : MonoBehaviour
         float moveX = Input.GetAxis("Horizontal");
 
 
-        float newVelocity = moveX * speed;
-        rb.linearVelocity = new Vector2(newVelocity, rb.linearVelocity.y); 
-        if (moveX > 0) 
+        if(Mathf.Abs(moveX) > 0.01f)
         {
-            spriteRenderer.flipX = false;
-            
-        }
-        else if (moveX < 0)
-        {
-            spriteRenderer.flipX = true;
+            float newVelocity = moveX * speed;
+            rb.linearVelocity = new Vector2(newVelocity, rb.linearVelocity.y);
+            if (moveX > 0)
+            {
+                spriteRenderer.flipX = false;
+
+            }
+            else if (moveX < 0)
+            {
+                spriteRenderer.flipX = true;
+            }
         }
     }
 
@@ -120,10 +128,37 @@ public class Player : MonoBehaviour
         }
     }
 
-    private static void ReloadScene()
+    private void ReloadScene()
     {
         UnityEngine.SceneManagement.Scene scene = SceneManager.GetActiveScene();
 
         SceneManager.LoadScene(scene.name);
     }
+
+
+    private void FlashRed()
+    {
+        StartCoroutine(FlashRoutine());
+    }
+
+    private IEnumerator FlashRoutine()
+    {
+        isInvulnerable = true;
+        spriteRenderer.color = damageColor;
+        yield return new WaitForSeconds(flashDuration);
+        isInvulnerable = false;
+        spriteRenderer.color = Color.white;
+    }
+
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Enemy") && !isInvulnerable)
+        {
+            health -= 25;
+            FlashRed();
+
+        }
+    }
+
 }

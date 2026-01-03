@@ -17,4 +17,6 @@ public class GameManager : MonoBehaviour
         this.score += score;
         Debug.Log(this.score);
     }
+
+    
 }

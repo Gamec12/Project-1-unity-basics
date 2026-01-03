@@ -24,4 +24,12 @@ public class Bullet : MonoBehaviour
         Debug.Log(rb.linearVelocity);
 
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag != "Player")
+        {
+            Destroy(gameObject);
+        }
+    }
 }
