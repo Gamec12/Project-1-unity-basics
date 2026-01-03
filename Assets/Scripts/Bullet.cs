@@ -14,6 +14,8 @@ public class Bullet : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
+
+
     // Update is called once per frame
 
 
@@ -29,6 +31,7 @@ public class Bullet : MonoBehaviour
     {
         if(collision.tag != "Player")
         {
+            Debug.Log("I AM DYING I HIT A " + collision.tag);
             Destroy(gameObject);
         }
     }

@@ -7,6 +7,8 @@ public class CommonEnemy : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Bullet"))
         {
+
+            Debug.Log("I HAVE BEEN HIT");
             Destroy(gameObject);
         }
     }
