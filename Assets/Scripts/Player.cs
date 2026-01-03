@@ -96,26 +96,23 @@ public class Player : MonoBehaviour
     {
         rb.AddForce(Vector2.up * jumpHeight, ForceMode2D.Impulse);
     }
-        
+
 
     void Move()
     {
         float moveX = Input.GetAxis("Horizontal");
 
-
-        if(Mathf.Abs(moveX) > 0.01f)
+        if (Mathf.Abs(moveX) > 0.01f)
         {
-            float newVelocity = moveX * speed;
-            rb.linearVelocity = new Vector2(newVelocity, rb.linearVelocity.y);
-            if (moveX > 0)
-            {
-                spriteRenderer.flipX = false;
 
-            }
-            else if (moveX < 0)
-            {
-                spriteRenderer.flipX = true;
-            }
+            float targetVelocityX = moveX * speed;
+            float speedDif = targetVelocityX - rb.linearVelocity.x;
+
+
+            rb.AddForce(Vector2.right * speedDif * 10f);
+
+            if (moveX > 0) spriteRenderer.flipX = false;
+            else if (moveX < 0) spriteRenderer.flipX = true;
         }
     }
 
