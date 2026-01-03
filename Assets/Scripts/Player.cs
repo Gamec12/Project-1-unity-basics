@@ -32,7 +32,12 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
+    private void FixedUpdate()
+    {
+        Move();
+       
 
+    }
     void Update()
     {
 
@@ -43,7 +48,7 @@ public class Player : MonoBehaviour
 
         isGrounded = groundCheck.isGrounded;
         anim.SetBool("IsJumping", !isGrounded);
-        Move();
+
         if (Input.GetKey(KeyCode.D) && isGrounded)
         {
             anim.SetBool("IsRunning", true);
@@ -63,16 +68,11 @@ public class Player : MonoBehaviour
         {
             Jump();
         }
-        if (Input.GetKeyDown(KeyCode.Mouse0) && isGrounded)
-        {
-
-            anim.SetTrigger("Attack");
-        }
-
-        if(Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             shoot();
         }
+
 
 
     }
