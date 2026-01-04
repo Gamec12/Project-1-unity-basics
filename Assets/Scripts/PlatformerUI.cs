@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 public class PlatformerUI : MonoBehaviour
 {
 
@@ -8,7 +9,9 @@ public class PlatformerUI : MonoBehaviour
     [SerializeField] GameObject SettingsPanel;
     [SerializeField] GameObject DisplayPanel;
     [SerializeField] GameObject AudioPanel;
+    [SerializeField] GameObject ControlPanel;
     [SerializeField] TMP_Dropdown ResolutionsDropdown;
+
     private Resolution[] resolutions;
     [SerializeField] TextMeshProUGUI topText;
 
@@ -68,9 +71,16 @@ public class PlatformerUI : MonoBehaviour
 
     }
 
+    public void LoadControls()
+    {
+        SettingsPanel.SetActive(false);
+        ControlPanel.SetActive(true);
+        topText.text = "Controls";
+    }
+
     public void StartGame()
     {
-        
+        SceneManager.LoadScene(1);
     }
 
     public void Exit()
@@ -92,11 +102,14 @@ public class PlatformerUI : MonoBehaviour
             MainMenuPanel.SetActive(true);
             topText.text = "Main Menu";
         }
-        else if (btnName == "Display" ||  btnName == "Audio")
+        else if (btnName == "Display" ||  btnName == "Audio" || btnName == "Controls")
         {
             DisplayPanel.SetActive(false);
             AudioPanel.SetActive(false);
+            ControlPanel.SetActive(false);
             SettingsPanel.SetActive(true);
+            
+            topText.text = "Settings";
         }
     }
 
