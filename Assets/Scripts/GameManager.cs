@@ -1,7 +1,11 @@
 using UnityEngine;
+using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 public class GameManager : MonoBehaviour
 {
+
+
 
     public static GameManager instance;
     public int score = 0;
@@ -15,6 +19,7 @@ public class GameManager : MonoBehaviour
     public void AddScore(int score)
     { 
         this.score += score;
+        UIManagerPlatformer.Instance.SetScoreUI(this.score);
         Debug.Log(this.score);
     }
 

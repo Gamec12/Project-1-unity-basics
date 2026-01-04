@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
+using Unity.Collections;
 using Unity.VectorGraphics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
 
@@ -13,7 +15,7 @@ public class Player : MonoBehaviour
 
     private bool isGrounded = false;
     private bool isInvulnerable = false;
-
+    private float maxHealth = 100;
     Animator anim;
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
@@ -23,6 +25,8 @@ public class Player : MonoBehaviour
 
     [SerializeField] private Color damageColor = Color.red;
     [SerializeField] private float flashDuration = 0.5f;
+
+
 
 
     void Start()
@@ -153,9 +157,16 @@ public class Player : MonoBehaviour
         if(collision.gameObject.CompareTag("Enemy") && !isInvulnerable)
         {
             health -= 25;
+            health = Mathf.Clamp(health, 0, (int) maxHealth);
+            UpdateHealthUI();
             FlashRed();
+
 
         }
     }
 
+    private void UpdateHealthUI()
+    {
+       UIManagerPlatformer.Instance.SetHealthUI(health, maxHealth);
+    }
 }
