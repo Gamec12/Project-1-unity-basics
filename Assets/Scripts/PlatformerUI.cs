@@ -7,6 +7,7 @@ public class PlatformerUI : MonoBehaviour
     [SerializeField] GameObject MainMenuPanel;
     [SerializeField] GameObject SettingsPanel;
     [SerializeField] GameObject DisplayPanel;
+    [SerializeField] GameObject AudioPanel;
     [SerializeField] TMP_Dropdown ResolutionsDropdown;
     private Resolution[] resolutions;
     [SerializeField] TextMeshProUGUI topText;
@@ -59,6 +60,13 @@ public class PlatformerUI : MonoBehaviour
         topText.text = "Display";
 
     }
+    public void LoadAudio()
+    {
+        SettingsPanel.SetActive(false);
+        AudioPanel.SetActive(true);
+        topText.text = "Audio";
+
+    }
 
     public void StartGame()
     {
@@ -86,7 +94,8 @@ public class PlatformerUI : MonoBehaviour
         }
         else if (btnName == "Display" ||  btnName == "Audio")
         {
-           DisplayPanel.SetActive(false);
+            DisplayPanel.SetActive(false);
+            AudioPanel.SetActive(false);
             SettingsPanel.SetActive(true);
         }
     }
